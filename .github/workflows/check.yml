@@ -1,0 +1,14 @@
+name: check
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the lab and restore the database
+        run: ./setup/install.sh
+      - name: Run the demo and exercise scripts
+        run: ./setup/run-scripts.sh

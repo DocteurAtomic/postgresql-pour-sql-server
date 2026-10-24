@@ -1,0 +1,23 @@
+# Lab of the course: PostgreSQL 18 with the pachadataformation database.
+# Start it and restore the database with: ./setup/install.sh
+services:
+  db:
+    image: postgres:18
+    container_name: pgcourse
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-course}
+    command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements"]
+    ports:
+      - "127.0.0.1:${PGPORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./setup:/setup:ro
+      - ./demos:/demos:ro
+      - ./exercises:/exercises:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+volumes:
+  pgdata:

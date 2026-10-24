@@ -1,0 +1,3 @@
+setup/*.pgdump
+setup/*.part
+.env
