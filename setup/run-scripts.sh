@@ -6,7 +6,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 compose=${COMPOSE:-docker compose}
 modules=("$@")
-[ ${#modules[@]} -eq 0 ] && modules=($( (ls demos exercises 2>/dev/null || true) | grep "^module_" | sort -u))
+if [ ${#modules[@]} -eq 0 ]; then
+    modules=($(ls demos exercises 2>/dev/null | grep '^module_' | sort -u || true))
+fi
 for m in "${modules[@]}"; do
     for f in $(ls demos/$m/*.sql exercises/$m/*.sql 2>/dev/null | sort); do
         if head -5 "$f" | grep -q -- '-- ci: skip'; then echo "skip $f"; continue; fi
