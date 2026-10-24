@@ -28,6 +28,7 @@ if $compose exec -T db psql -U postgres -XAtc "select 1 from pg_database where d
 fi
 $compose exec -T db createdb -U postgres -T template0 pachadataformation
 $compose exec -T db pg_restore -U postgres -d pachadataformation --no-owner /setup/pachadataformation.pgdump
-$compose exec -T db vacuumdb -U postgres --analyze-only pachadataformation
+$compose exec -T db psql -U postgres -d pachadataformation -X -q -v ON_ERROR_STOP=1 -f /setup/anonymize.sql
+$compose exec -T db vacuumdb -U postgres --analyze pachadataformation
 $compose exec -T db psql -U postgres -d pachadataformation -XAtc \
     "select count(*) || ' tables restored' from pg_tables where schemaname not in ('pg_catalog', 'information_schema')"

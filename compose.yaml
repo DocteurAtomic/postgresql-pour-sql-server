@@ -2,7 +2,7 @@
 # Start it and restore the database with: ./setup/install.sh
 services:
   db:
-    image: postgres:18
+    image: pgvector/pgvector:pg18
     container_name: pgcourse
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-course}
