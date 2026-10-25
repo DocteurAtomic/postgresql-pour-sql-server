@@ -1,0 +1,52 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Index Only Scan",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Scan Direction": "Forward",
+      "Index Name": "m05_facture_datefacture",
+      "Relation Name": "m05_facture",
+      "Alias": "m05_facture",
+      "Startup Cost": 0.29,
+      "Total Cost": 29.90,
+      "Plan Rows": 765,
+      "Plan Width": 4,
+      "Actual Startup Time": 0.030,
+      "Actual Total Time": 0.080,
+      "Actual Rows": 790.00,
+      "Actual Loops": 1,
+      "Disabled": false,
+      "Index Cond": "((datefacture >= '2011-03-01'::date) AND (datefacture <= '2011-03-31'::date))",
+      "Rows Removed by Index Recheck": 0,
+      "Heap Fetches": 0,
+      "Index Searches": 1,
+      "Shared Hit Blocks": 4,
+      "Shared Read Blocks": 0,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning": {
+      "Shared Hit Blocks": 84,
+      "Shared Read Blocks": 0,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning Time": 0.393,
+    "Triggers": [
+    ],
+    "Execution Time": 0.140
+  }
+]
