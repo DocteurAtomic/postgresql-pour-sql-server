@@ -1,0 +1,51 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Index Scan",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Scan Direction": "Forward",
+      "Index Name": "mv4_inscription_cancelled",
+      "Relation Name": "mv4_inscription",
+      "Alias": "mv4_inscription",
+      "Startup Cost": 0.29,
+      "Total Cost": 20.94,
+      "Plan Rows": 323,
+      "Plan Width": 16,
+      "Actual Startup Time": 0.029,
+      "Actual Total Time": 0.637,
+      "Actual Rows": 286.00,
+      "Actual Loops": 1,
+      "Disabled": false,
+      "Index Cond": "(dateannulation >= '2026-06-01'::date)",
+      "Rows Removed by Index Recheck": 0,
+      "Index Searches": 1,
+      "Shared Hit Blocks": 232,
+      "Shared Read Blocks": 3,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning": {
+      "Shared Hit Blocks": 91,
+      "Shared Read Blocks": 1,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning Time": 0.504,
+    "Triggers": [
+    ],
+    "Execution Time": 0.691
+  }
+]

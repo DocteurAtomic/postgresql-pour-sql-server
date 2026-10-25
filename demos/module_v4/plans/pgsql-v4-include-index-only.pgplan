@@ -1,0 +1,52 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Index Only Scan",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Scan Direction": "Forward",
+      "Index Name": "mv4_inscription_contact_incl",
+      "Relation Name": "mv4_inscription",
+      "Alias": "mv4_inscription",
+      "Startup Cost": 0.43,
+      "Total Cost": 11.63,
+      "Plan Rows": 183,
+      "Plan Width": 12,
+      "Actual Startup Time": 0.043,
+      "Actual Total Time": 0.075,
+      "Actual Rows": 99.00,
+      "Actual Loops": 1,
+      "Disabled": false,
+      "Index Cond": "(contactid = 1203)",
+      "Rows Removed by Index Recheck": 0,
+      "Heap Fetches": 0,
+      "Index Searches": 1,
+      "Shared Hit Blocks": 3,
+      "Shared Read Blocks": 4,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning": {
+      "Shared Hit Blocks": 93,
+      "Shared Read Blocks": 1,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0
+    },
+    "Planning Time": 0.444,
+    "Triggers": [
+    ],
+    "Execution Time": 0.115
+  }
+]
