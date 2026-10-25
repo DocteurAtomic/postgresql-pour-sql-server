@@ -1,0 +1,6 @@
+-- Clip D8.3: one table of the dbo schema, to see pgloader find its identity column.
+LOAD DATABASE
+  FROM mssql://{{MSSQL_USER}}:{{MSSQL_PASSWORD}}@{{MSSQL_HOST}}:{{MSSQL_PORT}}/{{MSSQL_DB}}
+  INTO postgresql://postgres:course@pgd8-schema/pachadata
+  WITH schema only
+  INCLUDING ONLY TABLE NAMES LIKE 'BoucleTest' IN SCHEMA 'dbo';

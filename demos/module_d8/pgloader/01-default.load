@@ -1,0 +1,11 @@
+-- Clip D8.3, first attempt: the schema of the training tables, with pgloader's defaults.
+-- Run by 03-convert-schema.sh; TARGET is the PostgreSQL container of the script.
+LOAD DATABASE
+  FROM mssql://{{MSSQL_USER}}:{{MSSQL_PASSWORD}}@{{MSSQL_HOST}}:{{MSSQL_PORT}}/{{MSSQL_DB}}
+  INTO postgresql://postgres:course@pgd8-schema/pachadata
+  WITH schema only
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Stage'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Inscription'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Formateur'
+  INCLUDING ONLY TABLE NAMES LIKE 'Adresse', 'Contact', 'Employe', 'Societe', 'SocieteAdresse', 'TypeAdresse' IN SCHEMA 'Contact'
+  INCLUDING ONLY TABLE NAMES LIKE 'Devise%', 'JourFerie', 'LieuFormation', 'ModePaiement', 'Pays', 'SalleFormation', 'TauxTVA' IN SCHEMA 'Reference';

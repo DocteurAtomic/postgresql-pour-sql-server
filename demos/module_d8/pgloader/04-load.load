@@ -1,0 +1,21 @@
+-- Clip D8.4: schema and data of the training tables, with the rules of 03-cast.load.
+-- Run by 04-load.sh, 05-validate.sh and 06-cutover.sh; TARGET is their container.
+LOAD DATABASE
+  FROM mssql://{{MSSQL_USER}}:{{MSSQL_PASSWORD}}@{{MSSQL_HOST}}:{{MSSQL_PORT}}/{{MSSQL_DB}}
+  INTO postgresql://postgres:course@pgd8-target/pachadata
+  WITH preserve index names
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Stage'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Inscription'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Formateur'
+  INCLUDING ONLY TABLE NAMES LIKE 'Adresse', 'Contact', 'Employe', 'Societe', 'SocieteAdresse', 'TypeAdresse' IN SCHEMA 'Contact'
+  INCLUDING ONLY TABLE NAMES LIKE 'Devise%', 'JourFerie', 'LieuFormation', 'ModePaiement', 'Pays', 'SalleFormation', 'TauxTVA' IN SCHEMA 'Reference'
+  CAST type varchar to varchar keep typemod,
+       type nvarchar to varchar keep typemod,
+       type char to char keep typemod,
+       type nchar to char keep typemod,
+       type decimal to numeric keep typemod,
+       type datetime to timestamp,
+       type datetime2 to timestamp,
+       type smalldatetime to timestamp
+  BEFORE LOAD DO
+  $$ create function public.suser_sname() returns text language sql as 'select current_user::text' $$;

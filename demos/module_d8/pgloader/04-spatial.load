@@ -1,0 +1,7 @@
+-- Clip D8.4: the two tables with geography and geometry columns, and the table they reference.
+LOAD DATABASE
+  FROM mssql://{{MSSQL_USER}}:{{MSSQL_PASSWORD}}@{{MSSQL_HOST}}:{{MSSQL_PORT}}/{{MSSQL_DB}}
+  INTO postgresql://postgres:course@pgd8-target/pachadata
+  WITH preserve index names
+  INCLUDING ONLY TABLE NAMES LIKE 'ville', 'Region', 'Pays' IN SCHEMA 'Reference'
+  CAST type geometry to bytea;

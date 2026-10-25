@@ -1,0 +1,13 @@
+-- Clip D8.3, second attempt: the T-SQL function of a column default, created first in
+-- PostgreSQL; the types still follow pgloader's defaults.
+LOAD DATABASE
+  FROM mssql://{{MSSQL_USER}}:{{MSSQL_PASSWORD}}@{{MSSQL_HOST}}:{{MSSQL_PORT}}/{{MSSQL_DB}}
+  INTO postgresql://postgres:course@pgd8-schema/pachadata
+  WITH schema only
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Stage'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Inscription'
+  INCLUDING ONLY TABLE NAMES LIKE '%' IN SCHEMA 'Formateur'
+  INCLUDING ONLY TABLE NAMES LIKE 'Adresse', 'Contact', 'Employe', 'Societe', 'SocieteAdresse', 'TypeAdresse' IN SCHEMA 'Contact'
+  INCLUDING ONLY TABLE NAMES LIKE 'Devise%', 'JourFerie', 'LieuFormation', 'ModePaiement', 'Pays', 'SalleFormation', 'TauxTVA' IN SCHEMA 'Reference'
+  BEFORE LOAD DO
+  $$ create function public.suser_sname() returns text language sql as 'select current_user::text' $$;
