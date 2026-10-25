@@ -1,0 +1,6 @@
+# Clip D4.5: the maintenance of an instance in the crontab of the postgres user
+# (crontab -e as postgres). Not played: an example to adapt. The clients connect by the
+# local socket, as the postgres role; a .pgpass file or peer authentication avoids passwords.
+# m  h  dom mon dow  command
+30   2  *   *   *    vacuumdb --all --analyze-only --quiet
+0    4  *   *   0    pg_amcheck --all --install-missing --heapallindexed >> /var/log/postgresql/amcheck.log 2>&1

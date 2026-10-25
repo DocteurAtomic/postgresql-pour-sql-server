@@ -1,0 +1,12 @@
+# Clip D4.5: starts pg-amcheck.service every Sunday at 4:00. Persistent=true runs a missed
+# start at the next boot, which cron does not do. The output goes to the journal:
+# journalctl -u pg-amcheck.service
+[Unit]
+Description=Weekly pg_amcheck
+
+[Timer]
+OnCalendar=Sun *-*-* 04:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

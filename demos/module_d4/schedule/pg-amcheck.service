@@ -1,0 +1,12 @@
+# Clip D4.5: the weekly check of every database by pg_amcheck, as a systemd service started
+# by pg-amcheck.timer. Not played: an example to adapt (path of the binaries of the PGDG
+# packages for Red Hat; /usr/lib/postgresql/18/bin on Debian). Copy both files to
+# /etc/systemd/system, then: systemctl daemon-reload && systemctl enable --now pg-amcheck.timer
+[Unit]
+Description=Check the indexes and tables of every database with pg_amcheck
+After=postgresql-18.service
+
+[Service]
+Type=oneshot
+User=postgres
+ExecStart=/usr/pgsql-18/bin/pg_amcheck --all --install-missing --heapallindexed
