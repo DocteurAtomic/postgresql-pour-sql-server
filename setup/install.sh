@@ -26,9 +26,14 @@ if $compose exec -T db psql -U postgres -XAtc "select 1 from pg_database where d
     echo "The database pachadataformation already exists: nothing to restore."
     exit 0
 fi
-$compose exec -T db createdb -U postgres -T template0 pachadataformation
-$compose exec -T db pg_restore -U postgres -d pachadataformation --no-owner /setup/pachadataformation.pgdump
-$compose exec -T db psql -U postgres -d pachadataformation -X -q -v ON_ERROR_STOP=1 -f /setup/anonymize.sql
-$compose exec -T db vacuumdb -U postgres --analyze pachadataformation
+# Restore under a temporary name and rename at the end: an interrupted restore leaves only
+# the temporary database, which the next run drops and restores again.
+tmp=pachadataformation_restore
+$compose exec -T db dropdb -U postgres --if-exists $tmp
+$compose exec -T db createdb -U postgres -T template0 $tmp
+$compose exec -T db pg_restore -U postgres -d $tmp --no-owner /setup/pachadataformation.pgdump
+$compose exec -T db psql -U postgres -d $tmp -X -q -v ON_ERROR_STOP=1 -f /setup/anonymize.sql
+$compose exec -T db vacuumdb -U postgres --analyze $tmp
+$compose exec -T db psql -U postgres -X -q -c "alter database $tmp rename to pachadataformation"
 $compose exec -T db psql -U postgres -d pachadataformation -XAtc \
     "select count(*) || ' tables restored' from pg_tables where schemaname not in ('pg_catalog', 'information_schema')"

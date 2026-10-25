@@ -15,7 +15,7 @@ services:
       - ./demos:/demos:ro
       - ./exercises:/exercises:ro
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-U", "postgres", "-h", "127.0.0.1"]
       interval: 2s
       timeout: 5s
       retries: 30
