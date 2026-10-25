@@ -1,0 +1,14 @@
+-- Example of a psql startup file (.psqlrc). psql reads ~/.psqlrc at startup, unless it is
+-- started with -X; the PSQLRC environment variable points it to another file:
+--   docker compose exec -e PSQLRC=/demos/module_01/psqlrc.example db psql -U postgres -d pachadataformation
+\set QUIET on
+-- Stop a script at the first error, as sqlcmd -b does.
+\set ON_ERROR_STOP on
+-- Show NULL instead of an empty cell.
+\pset null '(null)'
+-- Switch to expanded display when a row is wider than the screen.
+\x auto
+\timing on
+-- The prompt: user@database, then # for a superuser.
+\set PROMPT1 '%n@%/%R%# '
+\set QUIET off
